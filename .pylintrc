@@ -1,0 +1,4 @@
+# -*- mode: conf -*-
+# based on pycommon v0.1
+[MESSAGES CONTROL]
+disable=invalid-name,fixme,missing-docstring,too-few-public-methods,no-self-use,too-many-instance-attributes

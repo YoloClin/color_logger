@@ -1,0 +1,45 @@
+* color-logger
+[[/.ci/output/pylint.txt][/.ci/output/pylint.svg]]
+[[/.ci/output/mypy.txt][/.ci/output/mypy.svg]]
+[[/.ci/output/coverage.txt][/.ci/output/coverage.svg]]
+[[/.ci/output/todos.txt][/.ci/output/todos.svg]]
+
+** Python Module
+
+#+BEGIN_SRC python
+import logging
+from color_logger import cprint, Colors
+try:
+    import color_logger
+except ImportError:
+    color_logger = None
+
+if color_logger:
+    logging.setLoggerClass(color_logger.ColorLogger)
+else:
+    logging.basicConfig()
+
+log = logging.getLogger(__file__[:-3].split("/")[-1])
+log.setLevel(logging.DEBUG)
+
+log.debug("%s, %s", "Hello", "World")
+log.info("%s, %s", "Hello", "World")
+log.warning("%s, %s", "Hello", "World")
+log.error("%s, %s", "Hello", "World")
+log.critical("%s, %s", "Hello", "World")
+
+cprint("Hello", Colors.RED)
+cprint("World", Colors.GREEN)
+cprint("0", Colors.BLUE)
+cprint("1", Colors.CYAN)
+cprint("2", Colors.YELLOW)
+cprint("3", Colors.RESET)
+
+# Disabling color output:
+color_logger.color_logger.use_color = False
+cprint("Hello", '\033[31m')
+log.critical("AAA")
+#+END_SRC
+
+-----
+Based on pycommon v0.5
